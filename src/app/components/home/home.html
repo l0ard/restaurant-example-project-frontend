@@ -1,0 +1,14 @@
+<ul>
+  @for (food of foods; track food) {
+    <li>
+      <a>
+        <img
+          [ngSrc]="food.path"
+          alt="food.name"
+          width="1200"
+          height="860"
+        />
+      </a>
+    </li>
+  }
+</ul>
