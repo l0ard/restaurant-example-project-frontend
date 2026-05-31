@@ -1,3 +1,4 @@
+<app-search />
 <ul>
   @for (food of foods; track food) {
     <li>
@@ -15,7 +16,23 @@
           <span class="favorite" [class.not]="!food.favorite">
             ❤
           </span>
-          <app-star-rating [rating]="food.stars"></app-star-rating>
+          <div class="stars">
+            <app-star-rating [rating]="food.stars"></app-star-rating>
+          </div>
+          <div class="product-item-footer">
+            <div class="origins">
+              @for (origin of food.origins; track origin) {
+                <span>{{ origin }}</span>
+              }
+            </div>
+            <div class="cook-time">
+              <span>🕒</span>
+              {{ food.cookTime }}
+            </div>
+            <div class="price">
+              {{ food.price | currency }}
+            </div>
+          </div>
         </div>
       </a>
     </li>
