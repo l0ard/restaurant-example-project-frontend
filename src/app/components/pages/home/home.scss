@@ -28,3 +28,11 @@ li a{
     height: auto;
   }
 }
+
+.favorite {
+  color: red;
+}
+
+.favorite.not {
+  color: grey;
+}

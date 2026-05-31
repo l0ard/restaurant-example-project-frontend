@@ -1,0 +1,11 @@
+.star-rating {
+  display: flex;
+  gap: 0.5rem;
+  span {
+    font-size: 2rem;
+    color: #ccc;
+    &.filled {
+      color: #f5b301;
+    }
+  }
+}
