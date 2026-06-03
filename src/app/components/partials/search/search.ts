@@ -12,7 +12,7 @@ export class Search {
   private activatedRoute = inject(ActivatedRoute);
   private router = inject(Router);
 
-  constructor() {
+  ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
       if (params['searchTerm']) {
         this.searchTerm = params['searchTerm'];
@@ -25,5 +25,4 @@ export class Search {
       void this.router.navigateByUrl('/search/'+ term);
     }
   }
-
 }

@@ -1,12 +1,12 @@
-import {Food} from './app/shared/models/food';
-
-
+import {Food} from './app/shared/models/Food';
+import { Tag } from './app/shared/models/Tag';
 export const sample_foods: Food[] = [
   {
     id: '1',
     name: 'Pizza Pepperoni',
     cookTime: '10-20',
     price: 10,
+    description: 'A classic Italian-style pizza topped with spicy pepperoni and melted mozzarella. Perfect for a quick and satisfying meal.',
     favorite: false,
     origins: ['italy'],
     stars: 4.5,
@@ -18,6 +18,7 @@ export const sample_foods: Food[] = [
     name: 'Meatball',
     price: 20,
     cookTime: '20-30',
+    description: 'Juicy, seasoned meatballs served with rich flavors inspired by traditional recipes. A hearty dish that never goes out of style.',
     favorite: true,
     origins: ['persia', 'middle east', 'china'],
     stars: 4.7,
@@ -29,6 +30,7 @@ export const sample_foods: Food[] = [
     name: 'Hamburger',
     price: 5,
     cookTime: '10-15',
+    description: 'A grilled beef patty served in a soft bun with fresh toppings. Simple, flavorful, and loved around the world.',
     favorite: false,
     origins: ['germany', 'us'],
     stars: 3.5,
@@ -40,6 +42,7 @@ export const sample_foods: Food[] = [
     name: 'Fried Potatoes',
     price: 2,
     cookTime: '15-20',
+    description: 'Golden and crispy fried potatoes with a soft, fluffy center. The perfect side dish or snack for any occasion.',
     favorite: true,
     origins: ['belgium', 'france'],
     stars: 3.3,
@@ -51,6 +54,7 @@ export const sample_foods: Food[] = [
     name: 'Chicken Soup',
     price: 11,
     cookTime: '40-50',
+    description: 'A warm and comforting chicken soup made with tender meat and aromatic spices. Ideal for cozy meals and cold days.',
     favorite: false,
     origins: ['india', 'asia'],
     stars: 3.0,
@@ -62,10 +66,22 @@ export const sample_foods: Food[] = [
     name: 'Vegetables Pizza',
     price: 9,
     cookTime: '40-50',
+    description: 'A colorful pizza loaded with fresh vegetables and melted cheese. A delicious choice for anyone who loves lighter pizza toppings.',
     favorite: false,
     origins: ['italy'],
     stars: 4.0,
     imageUrl: 'assets/images/foods/food-6.jpg',
     tags: ['FastFood', 'Pizza', 'Lunch'],
   },
+];
+
+export const sample_tags: Tag[] = [
+  { name: 'All', count: 6 },
+  { name: 'FastFood', count: 4 },
+  { name: 'Pizza', count: 2 },
+  { name: 'Lunch', count: 3 },
+  { name: 'SlowFood', count: 2 },
+  { name: 'Hamburger', count: 1 },
+  { name: 'Fry', count: 1 },
+  { name: 'Soup', count: 1 },
 ];

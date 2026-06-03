@@ -5,26 +5,32 @@ import { StarRating} from '../../partials/star-rating/star-rating';
 
 import { FoodService } from '../../../services/food/food-service';
 import { Search } from '../../partials/search/search';
+import { Tags } from '../../partials/tags/tags';
+import { NotFound } from '../../partials/not-found/not-found';
 
 @Component({
   selector: 'app-home',
-  imports: [NgOptimizedImage, RouterLink, StarRating, CurrencyPipe, Search],
+  imports: [NgOptimizedImage, RouterLink, StarRating, CurrencyPipe, Search, Tags, NotFound],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
   private activatedRoute = inject(ActivatedRoute);
   private foodService = inject(FoodService);
+
   foods = this.foodService.getAll();
 
-  constructor() {
+  ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      const searchTerm = params['searchTerm'];
       if (params['searchTerm']) {
-        this.foods = this.foodService.getAllFoodsBySearchTerm(searchTerm);
-      } else {
-        this.foods = this.foodService.getAll();
+        this.foods = this.foodService.getAllFoodsBySearchTerm(params['searchTerm']);
+        return;
       }
+      if (params['tag']) {
+        this.foods = this.foodService.getAllFoodsByTag(params['tag']);
+        return;
+      }
+      this.foods = this.foodService.getAll();
     });
   }
 }

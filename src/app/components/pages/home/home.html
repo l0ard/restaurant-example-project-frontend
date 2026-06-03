@@ -1,4 +1,9 @@
 <app-search />
+<app-tags />
+<app-not-found
+  [visible]="!foods || !foods.length"
+  resetLinkText="Reset Search"
+/>
 <ul>
   @for (food of foods; track food) {
     <li>
@@ -8,6 +13,7 @@
           [alt]="food.name"
           width="1200"
           height="860"
+          priority
         />
         <div class="content">
           <div class="name">

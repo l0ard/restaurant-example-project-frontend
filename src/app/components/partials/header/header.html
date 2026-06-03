@@ -14,7 +14,10 @@
         </li>
         <li>
           <a routerLink="/cart-page">
-            Cart<span>3</span>
+            Cart
+            @if(cartQuantity) {
+              <span>{{cartQuantity}}</span>
+            }
           </a>
         </li>
       </ul>
