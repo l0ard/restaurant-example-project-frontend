@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: Home,
   },
   {
-    path: 'tag/:tag',
+    path: 'tag/:tagId',
     component: Home,
   },
   {

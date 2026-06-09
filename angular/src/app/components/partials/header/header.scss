@@ -2,7 +2,7 @@ header{
   position: relative;
   background: #af1313;
   padding: 0;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid white;
 }
 
 .container {
@@ -45,9 +45,13 @@ nav ul{
   z-index: 1;
   background: #af1313;
   display:none;
+  border: 1px solid white;
   a{
     width: 100%;
     min-width:8rem;
+  }
+  > a:not(:first-child){
+    border-top: 1px solid white;
   }
 }
 
@@ -63,17 +67,17 @@ a{
   &.logo {
     font-weight: bold;
     padding: 1em;
-    border-right: 2px solid black;
+    border-right: 1px solid white;
   }
 }
 
 
 
 nav > ul > li:first-child > a {
-  border-left: 2px solid black;
+  border-left: 1px solid white;
 }
 nav > ul > li + li > a {
-  border-left: 2px solid black;
+  border-left: 1px solid white;
 }
 
 

@@ -30,13 +30,19 @@ class Tag
         $this->foods = new ArrayCollection();
     }
 
-    #[Groups(['food:read'])]
+    #[Groups([
+        'tag:read',
+        'food:read'
+    ])]
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    #[Groups(['food:read'])]
+    #[Groups([
+        'tag:read',
+        'food:read'
+    ])]
     public function getName(): ?string
     {
         return $this->name;
@@ -74,5 +80,14 @@ class Tag
         }
 
         return $this;
+    }
+
+    #[Groups([
+        'tag:read',
+        'food:read'
+    ])]
+    public function getFoodCount(): int
+    {
+        return $this->foods->count();
     }
 }

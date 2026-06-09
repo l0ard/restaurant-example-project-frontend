@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { Tag } from '../../../shared/models/Tag';
 import { FoodService } from '../../../services/food/food-service';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-tags',
@@ -11,9 +11,6 @@ import { RouterLink } from '@angular/router';
 })
 export class Tags {
   foodService = inject(FoodService);
-  tags?: Tag[];
 
-  ngOnInit() {
-    this.tags = this.foodService.getAllTags();
-  }
+  tags = toSignal(this.foodService.getAllTags(), { initialValue: [] });
 }

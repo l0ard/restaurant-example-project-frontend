@@ -1,8 +1,8 @@
+@if(food(); as food){
 <app-not-found
   [visible]="!food.id"
   notFoundMessage="This item is not available anymore or has been removed!"
   resetLinkText="Back to Overview" />
-@if(food.id){
 <div class="container">
   <img [ngSrc]="food.imageUrl"
        [alt]="food.name"
@@ -21,7 +21,7 @@
     </div>
     <div class="origins">
       @for (origin of food.origins; track origin){
-        <span>{{ origin }}</span>
+        <span>{{ origin.name }}</span>
       }
     </div>
     <div class="description">
@@ -29,8 +29,8 @@
     </div>
     <div class="tags">
       @for(tag of food.tags; track tag){
-        <a routerLink="/tag/{{tag}}">
-          {{ tag }}
+        <a routerLink="/tag/{{tag.id}}">
+          {{ tag.name }}
         </a>
       }
     </div>

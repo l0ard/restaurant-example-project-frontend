@@ -30,13 +30,19 @@ class Origin
         $this->foods = new ArrayCollection();
     }
 
-    #[Groups(['food:read'])]
+    #[Groups([
+        'origin:read',
+        'food:read'
+        ])]
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    #[Groups(['food:read'])]
+    #[Groups([
+        'origin:read',
+        'food:read'
+    ])]
     public function getName(): ?string
     {
         return $this->name;
@@ -74,5 +80,14 @@ class Origin
         }
 
         return $this;
+    }
+
+    #[Groups([
+        'origin:read',
+        'food:read'
+    ])]
+    public function getFoodCount(): int
+    {
+        return $this->foods->count();
     }
 }

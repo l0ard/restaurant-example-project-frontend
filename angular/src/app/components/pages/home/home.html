@@ -1,13 +1,14 @@
 <app-search />
 <app-tags />
-<app-not-found
-  [visible]="!foods || !foods.length"
-  resetLinkText="Reset Search"
-/>
+@if(foods(); as foods) {
+  <app-not-found
+    [visible]="foods.length === 0"
+    resetLinkText="Reset Search"
+  />
 <ul>
   @for (food of foods; track food) {
     <li>
-      <a routerLink="/food/{{food.id}}">
+      <a [routerLink]="['/food/', food.id]">
         <img
           [ngSrc]="food.imageUrl"
           [alt]="food.name"
@@ -28,7 +29,7 @@
           <div class="product-item-footer">
             <div class="origins">
               @for (origin of food.origins; track origin) {
-                <span>{{ origin }}</span>
+                <span>{{ origin.name }}</span>
               }
             </div>
             <div class="cook-time">
@@ -44,3 +45,4 @@
     </li>
   }
 </ul>
+}

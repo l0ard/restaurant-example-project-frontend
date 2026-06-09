@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { Food } from '../../../shared/models/Food';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FoodService } from '../../../services/food/food-service';
 import { StarRating } from '../../partials/star-rating/star-rating';
 import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { CartService } from '../../../services/cart/cart-service';
 import { NotFound } from '../../partials/not-found/not-found';
+import { switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-food-page',
@@ -19,18 +20,19 @@ export class FoodPage {
   private cartService = inject(CartService);
   private router = inject(Router);
 
-  food!: Food;
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      if (this.foodService.getFoodById(params['id'])) {
-        this.food = this.foodService.getFoodById(params['id']);
-      }
-    });
-  }
+  food = toSignal(
+    this.activatedRoute.params.pipe(
+      switchMap(params =>
+        this.foodService.getFoodById(params['id'])
+      )
+    ),
+    {
+      initialValue: null
+    }
+  );
 
   addToCart() {
-    this.cartService.addToCart(this.food);
+    // this.cartService.addToCart(this.food);
     this.router.navigateByUrl('/cart-page');
   }
 }
