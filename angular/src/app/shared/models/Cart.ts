@@ -1,7 +1,8 @@
-import { CartItem } from './CartItem';
+import { CartLine } from './CartLine';
 
 export class Cart {
-  items:CartItem[] = [];
-  totalPrice: number = 0;
-  totalCount: number = 0;
+  id!: number;
+  cartLines!: CartLine[];
+  totalPrice!: number;
+  totalCount!: number;
 }

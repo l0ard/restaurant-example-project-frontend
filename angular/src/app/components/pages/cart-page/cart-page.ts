@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Cart } from '../../../shared/models/Cart';
 import { CartService } from '../../../services/cart/cart-service';
-import { CartItem } from '../../../shared/models/CartItem';
+import { CartLine } from '../../../shared/models/CartLine';
 import { Title } from '../../partials/title/title';
 import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -16,19 +15,18 @@ import { NotFound } from '../../partials/not-found/not-found';
 export class CartPage {
   private cartService = inject(CartService);
 
-  cart!: Cart;
-  ngOnInit() {
-    this.cartService.getCartObservable().subscribe((cart) => {
-      this.cart = cart;
-    });
+  cart = inject(CartService).cart;
+
+  removeFromCart(cartLine: CartLine) {
+    this.cartService.removeFromCart(cartLine.id).subscribe();
   }
 
-  removeFromCart(cartItem: CartItem) {
-    this.cartService.removeFromCart(cartItem.food.id);
-  }
-
-  changeQuantity(cartItem: CartItem, quantityInString: string) {
+  changeQuantity(cartLine: CartLine, quantityInString: string) {
     const quantity = parseInt(quantityInString);
-    this.cartService.changeQuantity(cartItem.food.id, quantity);
+    this.cartService.changeQuantity(cartLine.id, quantity).subscribe();
+  }
+
+  clearCart() {
+    this.cartService.clearCart().subscribe();
   }
 }

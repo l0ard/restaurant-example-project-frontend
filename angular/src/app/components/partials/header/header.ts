@@ -10,13 +10,5 @@ import { CartService } from '../../../services/cart/cart-service';
   styleUrl: './header.scss',
 })
 export class Header {
-  cartService = inject(CartService);
-
-  cartQuantity = 0;
-
-  ngOnInit() {
-    this.cartService.getCartObservable().subscribe((newCart) => {
-      this.cartQuantity = newCart.totalCount;
-    });
-  }
+  cart = inject(CartService).cart;
 }

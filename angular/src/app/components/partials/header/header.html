@@ -15,8 +15,8 @@
         <li>
           <a routerLink="/cart-page">
             Cart
-            @if(cartQuantity) {
-              <span>{{cartQuantity}}</span>
+            @if(cart(); as cart) {
+              <span>{{cart.totalCount}}</span>
             }
           </a>
         </li>

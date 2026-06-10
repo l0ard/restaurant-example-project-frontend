@@ -32,7 +32,16 @@ export class FoodPage {
   );
 
   addToCart() {
-    // this.cartService.addToCart(this.food);
-    this.router.navigateByUrl('/cart-page');
+    const food = this.food();
+
+    if(!food){
+      return;
+    }
+
+    this.cartService
+      .addToCart(food.id)
+      .subscribe(() => {
+        this.router.navigateByUrl('/cart-page');
+      });
   }
 }
