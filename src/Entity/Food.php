@@ -56,13 +56,13 @@ class Food
         $this->origins = new ArrayCollection();
     }
 
-    #[Groups(['food:read'])]
+    #[Groups(['food:read', 'cart:read'])]
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    #[Groups(['food:read'])]
+    #[Groups(['food:read', 'cart:read'])]
     public function getName(): ?string
     {
         return $this->name;
@@ -88,7 +88,7 @@ class Food
         return $this;
     }
 
-    #[Groups(['food:read'])]
+    #[Groups(['food:read', 'cart:read'])]
     public function getImageUrl(): ?string
     {
         return $this->imageUrl;
@@ -101,10 +101,10 @@ class Food
         return $this;
     }
 
-    #[Groups(['food:read'])]
-    public function getPrice(): ?string
+    #[Groups(['food:read', 'cart:read'])]
+    public function getPrice(): ?float
     {
-        return $this->price;
+        return (float)$this->price;
     }
 
     public function setPrice(string $price): static

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CartLineRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CartLineRepository::class)]
 class CartLine
@@ -24,11 +25,13 @@ class CartLine
     #[ORM\JoinColumn(nullable: false)]
     private ?Cart $cart = null;
 
+    #[Groups('cart:read')]
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    #[Groups('cart:read')]
     public function getQuantity(): ?int
     {
         return $this->quantity;
@@ -41,6 +44,7 @@ class CartLine
         return $this;
     }
 
+    #[Groups('cart:read')]
     public function getFood(): ?Food
     {
         return $this->food;
@@ -63,5 +67,13 @@ class CartLine
         $this->cart = $cart;
 
         return $this;
+    }
+
+    #[Groups(['cart:read'])]
+    public function getLinePrice(): float
+    {
+        return round(
+            (float)$this->food->getPrice() * $this->quantity, 2
+        );
     }
 }

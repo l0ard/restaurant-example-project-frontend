@@ -6,6 +6,7 @@ use App\Repository\CartRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 class Cart
@@ -26,17 +27,19 @@ class Cart
         $this->cartLines = new ArrayCollection();
     }
 
+    #[Groups('cart:read')]
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * @return Collection<int, CartLine>
+     * @return array<int, CartLine>
      */
-    public function getCartLines(): Collection
+    #[Groups('cart:read')]
+    public function getCartLines(): array
     {
-        return $this->cartLines;
+        return array_values($this->cartLines->toArray());
     }
 
     public function addCartLine(CartLine $cartLine): static
@@ -59,5 +62,28 @@ class Cart
         }
 
         return $this;
+    }
+
+    #[Groups(['cart:read'])]
+    public function getTotalPrice(): float
+    {
+        return round(
+            array_reduce(
+            $this->cartLines->toArray(),
+            fn ($sum, CartLine $line) =>
+                $sum + $line->getLinePrice(),
+            0
+        ));
+    }
+
+    #[Groups(['cart:read'])]
+    public function getTotalCount(): int
+    {
+        return array_reduce(
+            $this->cartLines->toArray(),
+            fn ($sum, CartLine $line) =>
+                $sum + $line->getQuantity(),
+            0
+        );
     }
 }
