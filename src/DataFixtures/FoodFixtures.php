@@ -17,7 +17,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create();
 
         for($i = 0; $i < 25; $i++){
-            $food = new Food()
+            $food = (new Food())
                 ->setName($faker->unique()->word())
                 ->setDescription($faker->realText(254))
                 ->setCookTime($faker->numberBetween(10,30) . '-' . $faker->numberBetween(35,60))
