@@ -1,0 +1,101 @@
+.login-container {
+  max-width: 450px;
+  margin: 5rem auto;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #c81010;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #c81010;
+}
+
+small {
+  display: block;
+  margin-top: 0.3rem;
+  color: #c81010;
+  font-size: 0.85rem;
+}
+
+button {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 999px;
+  background-color: #af1313;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  opacity: 0.8;
+}
+
+button:hover:not(:disabled) {
+  opacity: 1.0;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.error {
+  margin-bottom: 1rem;
+  padding: 0.9rem;
+  border-radius: 0.75rem;
+  background: #ffe5e5;
+  color: #c81010;
+  border: 1px solid #ffc4c4;
+  text-align: center;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+}
+
+.register-link a {
+  color: #c81010;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
 import { CartService } from '../../../services/cart/cart-service';
+import { AuthService } from '../../../services/auth/auth-service';
 
 @Component({
   selector: 'app-header',
@@ -10,5 +11,12 @@ import { CartService } from '../../../services/cart/cart-service';
   styleUrl: './header.scss',
 })
 export class Header {
+  private authService = inject(AuthService);
+
   cart = inject(CartService).cart;
+  currentUser= this.authService.currentUser;
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
+  }
 }

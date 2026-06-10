@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
@@ -40,11 +41,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Cart $cart = null;
+
+    #[Groups(['user:read'])]
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    #[Groups(['user:read'])]
     public function getUsername(): ?string
     {
         return $this->username;
@@ -70,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+    #[Groups(['user:read'])]
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -121,6 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // @deprecated, to be removed when upgrading to Symfony 8
     }
 
+    #[Groups(['user:read'])]
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -133,6 +141,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[Groups(['user:read'])]
     public function getLastName(): ?string
     {
         return $this->lastName;
@@ -145,6 +154,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[Groups(['user:read'])]
     public function getEmail(): ?string
     {
         return $this->email;
@@ -153,6 +163,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    #[Groups(['user:read'])]
+    public function getCart(): ?Cart
+    {
+        return $this->cart;
+    }
+
+    public function setCart(Cart $cart): static
+    {
+        // set the owning side of the relation if necessary
+        if ($cart->getUser() !== $this) {
+            $cart->setUser($this);
+        }
+
+        $this->cart = $cart;
 
         return $this;
     }
