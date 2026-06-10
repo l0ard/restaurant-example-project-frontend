@@ -1,17 +1,38 @@
-# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# Symfony
 
-# Compiled output
-/dist
-/tmp
-/out-tsc
-/bazel-out
+/vendor/
+/var/cache/
+/var/log/
+/var/sessions/
 
-# Node
-/node_modules
-npm-debug.log
-yarn-error.log
+.env.local
+.env.*.local
+
+.phpunit.result.cache
+/.symfony.local.yaml
+
+# Angular
+
+/angular/dist
+/angular/tmp
+/angular/out-tsc
+/angular/bazel-out
+
+/angular/node_modules
+/angular/npm-debug.log
+/angular/yarn-error.log
+
+/angular/.angular/cache
+/angular/.sass-cache
+/angular/connect.lock
+/angular/coverage
+/angular/libpeerconnection.log
+/angular/testem.log
+/angular/typings
+/angular/__screenshots__/
 
 # IDEs and editors
+
 .idea/
 .project
 .classpath
@@ -20,25 +41,16 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
-# Visual Studio Code
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/mcp.json
+
 .history/*
 
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-__screenshots__/
-
 # System files
+
 .DS_Store
 Thumbs.db

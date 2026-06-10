@@ -1,0 +1,26 @@
+<header>
+  <div class="container">
+    <a href="#" routerLink="/" class="logo">{{ "Food Place!" | uppercase }}</a>
+    <nav>
+      <ul>
+        <li><a routerLink="/login">Login</a></li>
+        <li class="menu-container">
+          <a routerLink="/dashboard">John</a>
+          <div class="menu">
+            <a routerLink="/profile">Profile</a>
+            <a routerLink="/orders">Orders</a>
+            <a href="#">Logout</a>
+          </div>
+        </li>
+        <li>
+          <a routerLink="/cart-page">
+            Cart
+            @if(cart(); as cart) {
+              <span>{{cart.totalCount}}</span>
+            }
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
