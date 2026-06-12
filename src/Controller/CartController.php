@@ -18,7 +18,7 @@ final class CartController extends AbstractController
 {
     private EntityManagerInterface $em;
 
-    private String $cartNotFoundMessage = 'Cart Not Found';
+    private string $cartNotFoundMessage = 'Cart Not Found';
 
     public function __construct(
         EntityManagerInterface $em)
@@ -48,7 +48,7 @@ final class CartController extends AbstractController
     public function addFoodToCart(Food $food): JsonResponse
     {
         /** @var User $user */
-        $user = $this->getCart();
+        $user = $this->getUser();
 
         $cart = $user->getCart();
         if(!$cart){
@@ -84,10 +84,6 @@ final class CartController extends AbstractController
         );
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     #[Route('/api/cart/lines/{id}', methods: ['DELETE'])]
     public function removeCartLineFromCart(CartLine $cartLine): JsonResponse
     {
@@ -109,10 +105,6 @@ final class CartController extends AbstractController
         );
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     #[Route('/api/cart/lines/{id}', methods: ['PATCH'])]
     public function changeQuantity(CartLine $cartLine, Request $request): JsonResponse
     {

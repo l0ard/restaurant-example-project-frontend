@@ -91,7 +91,6 @@ class Cart
         );
     }
 
-    #[Groups(['cart:read'])]
     public function getUser(): ?User
     {
         return $this->user;

@@ -29,7 +29,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
                 $food->addOrigin($this->getReference('origin_' . rand(0, 19), Origin::class));
             }
             for($j = 0; $j < rand(1,3); $j++){
-                $food->addTag($this->getReference('tag_' . rand(0, 19), Tag::class));
+                $food->addTag($this->getReference('tag_' . rand(0, 11), Tag::class));
             }
             $this->addReference('food_' . $i, $food);
             $manager->persist($food);

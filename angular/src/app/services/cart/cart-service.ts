@@ -1,15 +1,29 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { Cart } from '../../shared/models/Cart';
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth/auth-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   private http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   cart = signal<Cart | null>(null);
+
+  constructor() {
+    effect(() => {
+      const user = this.authService.currentUser();
+
+      if (user) {
+        this.loadCart().subscribe();
+      } else {
+        this.cart.set(null);
+      }
+    });
+  }
 
   loadCart(): Observable<Cart>{
     return this.http.get<Cart>('/api/cart')

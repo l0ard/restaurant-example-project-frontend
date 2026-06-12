@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { UpperCasePipe } from '@angular/common';
 import { CartService } from '../../../services/cart/cart-service';
 import { AuthService } from '../../../services/auth/auth-service';
+import { Search } from '../search/search';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, UpperCasePipe],
+  imports: [RouterLink, UpperCasePipe, Search],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -14,9 +15,13 @@ export class Header {
   private authService = inject(AuthService);
 
   cart = inject(CartService).cart;
-  currentUser= this.authService.currentUser;
+  currentUser = this.authService.currentUser;
 
   isAuthenticated() {
     return this.authService.isAuthenticated();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

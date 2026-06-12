@@ -40,7 +40,13 @@ export class Login {
         next: (response) => {
           localStorage.setItem('jwt', response.token);
 
-          this.router.navigate(['/']);
+          this.authService
+            .loadCurrentUser()
+            .subscribe({
+              next: () => {
+                this.router.navigate(['/']);
+              }
+            });
         },
 
         error: (error) => {

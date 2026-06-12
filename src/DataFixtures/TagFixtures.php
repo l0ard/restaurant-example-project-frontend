@@ -13,7 +13,7 @@ class TagFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for($i = 0; $i < 20; $i++){
+        for($i = 0; $i < 12; $i++){
             $tag = new Tag();
             $tag->setName($faker->unique()->word());
             $this->addReference('tag_' . $i, $tag);

@@ -7,6 +7,7 @@ import { CartService } from '../../../services/cart/cart-service';
 import { NotFound } from '../../partials/not-found/not-found';
 import { switchMap } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AuthService } from '../../../services/auth/auth-service';
 
 @Component({
   selector: 'app-food-page',
@@ -16,6 +17,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class FoodPage {
   activatedRoute = inject(ActivatedRoute);
+  authService = inject(AuthService);
   foodService = inject(FoodService);
   private cartService = inject(CartService);
   private router = inject(Router);
@@ -32,6 +34,10 @@ export class FoodPage {
   );
 
   addToCart() {
+    if (!this.authService.isAuthenticated()) {
+      return;
+    }
+
     const food = this.food();
 
     if(!food){

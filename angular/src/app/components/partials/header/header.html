@@ -1,6 +1,9 @@
 <header>
   <div class="container">
     <a href="#" routerLink="/" class="logo">{{ "Food Place!" | uppercase }}</a>
+    <div class="search-container">
+      <app-search />
+    </div>
     <nav>
       <ul>
         @if(!isAuthenticated()) {
@@ -22,7 +25,9 @@
             }
           </a>
         </li>
-        <li><a routerLink="/logout">Logout</a></li>
+          <li>
+            <button type="button" (click)="logout()">Logout</button>
+          </li>
         }
       </ul>
     </nav>

@@ -167,7 +167,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    #[Groups(['user:read'])]
     public function getCart(): ?Cart
     {
         return $this->cart;

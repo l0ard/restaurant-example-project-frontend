@@ -1,7 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { Router} from '@angular/router';
 import { User } from '../../shared/models/User'
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export interface LoginResponse {
   token: string;
@@ -12,6 +13,7 @@ export interface LoginResponse {
 })
 export class AuthService {
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   currentUser = signal<User | null>(null);
 
@@ -19,7 +21,10 @@ export class AuthService {
     return this.currentUser() !== null;
   }
 
-  login(username: string, password: string): Observable<LoginResponse> {
+  login(
+    username: string,
+    password: string
+  ): Observable<LoginResponse> {
     return this.http.post<{token: string}>(
       '/api/login',
       {
@@ -29,7 +34,11 @@ export class AuthService {
     )
   }
 
-  register(username: string, email: string, password: string){
+  register(
+    username: string,
+    email: string,
+    password: string
+  ){
     return this.http.post(
       '/api/register',
       {
@@ -38,5 +47,39 @@ export class AuthService {
         password
       }
     )
+  }
+
+  loadCurrentUser() {
+    return this.http.get<User>(
+      '/api/user'
+    ).pipe(
+      tap(user => this.currentUser.set(user))
+    );
+  }
+
+  initialize() {
+    const token = localStorage.getItem('jwt');
+
+    if(!token){
+      return;
+    }
+
+    this.loadCurrentUser().subscribe({
+      error: () => {
+        localStorage.removeItem('jwt');
+        this.currentUser.set(null);
+      }
+    });
+  }
+
+  logout() {
+    localStorage.removeItem('jwt');
+    this.currentUser.set(null);
+
+
+
+    //TODO temporary fix until data-access based on login is fully conceptualised
+    window.location.reload();
+    //this.router.navigate(['/']);
   }
 }

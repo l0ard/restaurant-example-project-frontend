@@ -111,10 +111,20 @@ button{
   padding: 1rem;
   border-radius: 10rem;
   outline: none;
+  transition: all 0.2s ease;
 
   &:hover{
     opacity: 0.8;
     cursor: pointer;
+  }
+}
+
+.login-required-btn {
+  background: #af1313;
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 0.3;
   }
 }
 

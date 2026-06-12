@@ -25,7 +25,7 @@ export class Register {
   });
 
   register(): void {
-    if (this.form.valid) {
+    if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }

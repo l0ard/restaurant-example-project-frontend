@@ -16,14 +16,19 @@ class CartLineFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for($i = 0; $i < 5; $i++){
-            $cartLine = new CartLine()
-                ->setCart($this->getReference('cart_0', Cart::class))
-                ->setFood($this->getReference('food_' . rand(0,25), Food::class))
-                ->setQuantity(rand(1,5));
-            $this->addReference('cartLine_' . $i, $cartLine);
-
-            $manager->persist($cartLine);
+        $k = 0;
+        for($i = 0; $i < 11; $i++){
+            for($j = 0; $j < 3; $j++){
+                if(random_int(0,1)) {
+                    $cartLine = (new CartLine())
+                        ->setCart($this->getReference('cart_' . $i, Cart::class))
+                        ->setFood($this->getReference('food_' . rand(0,24), Food::class))
+                        ->setQuantity(rand(1,5));
+                    $this->addReference('cartLine_' . $k, $cartLine);
+                    $k++;
+                    $manager->persist($cartLine);
+                }
+            }
         }
         $manager->flush();
     }

@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Header } from './components/partials/header/header';
 import { CartService } from './services/cart/cart-service';
+import { AuthService } from './services/auth/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,9 @@ import { CartService } from './services/cart/cart-service';
 })
 export class App {
   private cartService = inject(CartService);
+  private authService = inject(AuthService);
   protected readonly title = signal('restaurant-example-project');
   ngOnInit() {
-    this.cartService.loadCart().subscribe();
+    this.authService.initialize();
   }
 }

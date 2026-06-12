@@ -10,22 +10,22 @@ import { Origin } from '../../shared/models/Origin';
 })
 export class FoodService {
   private http = inject(HttpClient);
-  private readonly apiUrl = '/api/';
+  private readonly apiUrl = '/api/foods/';
 
   getAll(): Observable<Food[]> {
-    return this.http.get<Food[]>(this.apiUrl + 'foods');
+    return this.http.get<Food[]>(this.apiUrl);
   }
 
   getAllFoodsBySearchTerm(searchTerm: string) {
-    return this.http.get<Food[]>(this.apiUrl + 'foods/search/' + encodeURIComponent(searchTerm));
+    return this.http.get<Food[]>(this.apiUrl + 'search/' + encodeURIComponent(searchTerm));
   }
 
   getAllFoodsByTag(tagId: number): Observable<Food[]> {
-    return this.http.get<Food[]>(this.apiUrl + 'foods/tag/' + tagId);
+    return this.http.get<Food[]>(this.apiUrl + 'tag/' + tagId);
   }
 
   getFoodById(foodId: number): Observable<Food> {
-    return this.http.get<Food>(this.apiUrl + 'foods/' + foodId);
+    return this.http.get<Food>(this.apiUrl + foodId);
   }
 
   getAllTags() {

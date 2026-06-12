@@ -4,7 +4,7 @@
   "cli": {
     "packageManager": "npm",
     "cache": {
-      "enabled": false
+      "enabled": true
     },
     "analytics": false
   },
@@ -24,25 +24,26 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-	    "outputPath": "../public",
+            "outputPath": "../public",
             "deleteOutputPath": false,
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              },
-              "src/assets/",
-              "src/index.php"
-            ],
             "styles": [
               "src/styles.scss"
             ]
           },
           "configurations": {
             "production": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                },
+                "src/assets/",
+                "src/index.php",
+                "src/.htaccess"
+              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -58,6 +59,14 @@
               "outputHashing": "all"
             },
             "development": {
+              "assets": [
+                {
+                  "glob": "**/*",
+                  "input": "public"
+                },
+                "src/assets/",
+                "src/index.php"
+              ],
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true

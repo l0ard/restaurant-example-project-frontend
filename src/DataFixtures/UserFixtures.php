@@ -20,7 +20,18 @@ class UserFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for($i = 0; $i < 10; $i++){
+
+        //only for me
+        $baseUser = (new User())
+            ->setUsername('lennart')
+            ->setEmail('lennart.bauer@uni-muenster.de')
+            ->setFirstName('Lennart')
+            ->setLastName('Bauer');
+        $baseUser->setPassword($this->passwordHasher->hashPassword($baseUser, '123'));
+        $this->addReference('user_0', $baseUser);
+        $manager->persist($baseUser);
+
+        for($i = 1; $i < 11; $i++){
             $user = new User();
             $user
                 ->setUsername($faker->unique()->word())
@@ -32,6 +43,7 @@ class UserFixtures extends Fixture
 
             $manager->persist($user);
         }
+
         $manager->flush();
     }
 }

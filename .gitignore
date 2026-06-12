@@ -1,56 +1,32 @@
 # Symfony
 
 /vendor/
-/var/cache/
-/var/log/
-/var/sessions/
+/var/
 
 /public/browser/
 
 .env.local
+.env.dev
+.env.dev.local
 .env.*.local
 
 .phpunit.result.cache
 /.symfony.local.yaml
 
 # Angular
-
 /angular/dist
 /angular/tmp
-/angular/out-tsc
-/angular/bazel-out
-
+/angular/dist/
 /angular/node_modules
-/angular/npm-debug.log
-/angular/yarn-error.log
-
-/angular/.angular/cache
-/angular/.sass-cache
-/angular/connect.lock
-/angular/coverage
-/angular/libpeerconnection.log
-/angular/testem.log
-/angular/typings
-/angular/__screenshots__/
+/angular/.angular/
 
 # IDEs and editors
-
 .idea/
-.project
-.classpath
-.c9/
-*.launch
-.settings/
-*.sublime-workspace
-
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-!.vscode/mcp.json
-
-.history/*
 
 # System files
 

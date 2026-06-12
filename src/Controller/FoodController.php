@@ -34,7 +34,10 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/foods/{id}', name: 'api_food')]
+    #[Route(
+        '/api/foods/{id}',
+        name: 'api_food',
+        requirements: ['id' => '\d+'])]
     public function getFoodById(Food $food): JsonResponse
     {
         return $this->json(
@@ -43,7 +46,10 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/foods/tag/{id}', methods: ['GET'])]
+    #[Route(
+        '/api/foods/tag/{id}',
+        requirements: ['id' => '\d+'],
+        methods: ['GET'])]
     public function getAllFoodsByTag(Tag $tag): JsonResponse
     {
         return $this->json(
@@ -52,7 +58,11 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/foods/origin/{id}', methods: ['GET'])]
+    #[Route(
+        '/api/foods/origin/{id}',
+        requirements: ['id' => '\d+'],
+        methods: ['GET'],
+    )]
     public function getAllFoodsByOrigin(Origin $origin): JsonResponse
     {
         return $this->json(
@@ -61,7 +71,10 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/foods/search/{searchTerm}', methods: ['GET'])]
+    #[Route(
+        '/api/foods/search/{searchTerm}',
+        methods: ['GET'],
+    )]
     public function getAllFoodsBySearchTerm(string $searchTerm): JsonResponse
     {
         if(!$searchTerm)
@@ -73,7 +86,7 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/tags', name: 'api_tags')]
+    #[Route('/api/foods/tags', name: 'api_foods_tags')]
     public function getAllTags(): JsonResponse
     {
         return $this->json(
@@ -82,7 +95,7 @@ final class FoodController extends AbstractController
         );
     }
 
-    #[Route('/api/origins', name: 'api_origins')]
+    #[Route('/api/foods/origins', name: 'api_foods_origins')]
     public function getAllOrigins(): JsonResponse
     {
         return $this->json(
