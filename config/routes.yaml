@@ -21,5 +21,5 @@ frontend_index:
 
         private: true
     requirements:
-        req: "^((?!symfony).)*$"
+        req: '^(?!api(?:/|$)).*$'
 

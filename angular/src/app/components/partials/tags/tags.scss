@@ -1,14 +1,75 @@
-div{
-  display:flex;
+.tags-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.tags-list {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 0.5rem;
 
-  a{
-    background-color: #f0f0f0;
-    padding: 0.3rem 0.1rem;
-    margin: 0.2rem 0.15rem;
-    border-radius: 10rem;
-    font-weight: 400;
-    color: black;
-  }
+  max-width: 110rem;
+  padding: 0 1rem;
 }
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.45rem 0.9rem;
+
+  background: white;
+  border: 1px solid #ececec;
+  border-radius: 999px;
+
+  color: #444;
+  text-decoration: none;
+
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: #af1313;
+  border-color: #af1313;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.tag-name {
+  font-weight: 500;
+}
+
+.tag-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 1.4rem;
+  height: 1.4rem;
+
+  padding: 0 0.35rem;
+
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tag:hover .tag-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+.active-tag {
+  background: #af1313;
+  border-color: #af1313;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.active-tag .tag-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+

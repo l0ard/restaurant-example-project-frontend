@@ -42,7 +42,13 @@
     <div class="price">
       <span>{{food.price | currency}}</span>
     </div>
-    <button (click)="addToCart()">Add to Cart</button>
+    @if(authService.isAuthenticated()) {
+      <button class="add-to-cart-btn" (click)="addToCart()">Add to Cart</button>
+    } @else {
+      <button class="login-required-btn" routerLink="/login">
+        Login to add to cart
+      </button>
+    }
   </div>
 </div>
 }

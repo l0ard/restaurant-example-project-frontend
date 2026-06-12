@@ -13,11 +13,11 @@ export class Search {
   private router = inject(Router);
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      if (params['searchTerm']) {
-        this.searchTerm = params['searchTerm'];
-      }
-    });
+    const url = this.router.url;
+
+    if (url.startsWith('/search/')) {
+      this.searchTerm = decodeURIComponent(url.replace('/search/', ''));
+    }
   }
 
   search(term:string) {

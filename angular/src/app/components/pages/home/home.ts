@@ -6,7 +6,6 @@ import { switchMap } from 'rxjs';
 
 import { StarRating } from '../../partials/star-rating/star-rating';
 import { FoodService } from '../../../services/food/food-service';
-import { Search } from '../../partials/search/search';
 import { Tags } from '../../partials/tags/tags';
 import { NotFound } from '../../partials/not-found/not-found';
 
@@ -18,7 +17,6 @@ import { NotFound } from '../../partials/not-found/not-found';
     RouterLink,
     StarRating,
     CurrencyPipe,
-    Search,
     Tags,
     NotFound,
   ],

@@ -17,7 +17,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
         $faker = Factory::create();
 
         for($i = 0; $i < 25; $i++){
-            $food = new Food()
+            $food = (new Food())
                 ->setName($faker->unique()->word())
                 ->setDescription($faker->realText(254))
                 ->setCookTime($faker->numberBetween(10,30) . '-' . $faker->numberBetween(35,60))
@@ -29,7 +29,7 @@ class FoodFixtures extends Fixture implements DependentFixtureInterface
                 $food->addOrigin($this->getReference('origin_' . rand(0, 19), Origin::class));
             }
             for($j = 0; $j < rand(1,3); $j++){
-                $food->addTag($this->getReference('tag_' . rand(0, 19), Tag::class));
+                $food->addTag($this->getReference('tag_' . rand(0, 11), Tag::class));
             }
             $this->addReference('food_' . $i, $food);
             $manager->persist($food);

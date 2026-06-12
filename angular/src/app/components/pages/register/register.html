@@ -1,0 +1,81 @@
+<div class="register-container">
+
+  <h1>Create Account</h1>
+
+  @if(error) {
+    <div class="error">
+      {{ error }}
+    </div>
+  }
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="register()">
+
+    <div>
+      <label>Username</label>
+
+      <input
+        type="text"
+        formControlName="username">
+    </div>
+
+    @if(form.controls.username.touched &&
+    form.controls.username.invalid) {
+      <small>
+        Username is required
+      </small>
+    }
+
+    <div>
+      <label>Email</label>
+
+      <input
+        type="email"
+        formControlName="email">
+    </div>
+
+    @if(form.controls.email.touched &&
+    form.controls.email.invalid) {
+      <small>
+        Please enter a valid email address
+      </small>
+    }
+
+    <div>
+      <label>Password</label>
+
+      <input
+        type="password"
+        formControlName="password">
+    </div>
+
+    @if(form.controls.password.touched &&
+    form.controls.password.invalid) {
+      <small>
+        Password must be at least 8 characters long
+      </small>
+    }
+
+    <button
+      type="submit"
+      [disabled]="loading">
+
+      @if(loading) {
+        Creating account...
+      } @else {
+        Register
+      }
+
+    </button>
+  </form>
+
+  <div class="login-link">
+    Already have an account?
+
+    <a routerLink="/login">
+      Login
+    </a>
+  </div>
+
+</div>

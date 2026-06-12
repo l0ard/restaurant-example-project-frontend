@@ -1,8 +1,7 @@
 div{
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
 
   button{
     height: 3rem;
@@ -10,13 +9,12 @@ div{
     font-size: 1rem;
     border-radius: 0 10rem 10rem 0;
     border: none;
-    background-color: #af1313;
+    background: color-mix(in srgb, #af1313 80%, white);
     color: white;
-    opacity: 0.8;
     outline: none;
 
     &:hover{
-      opacity: 1.2;
+      background: color-mix(in srgb, #af1313 60%, white);
       cursor: pointer;
     }
   }
@@ -26,7 +24,7 @@ input{
   border-radius: 10rem 0 0 10rem;
   border: none;
   height: 3rem;
-  width: 20rem;
+  width: clamp(20rem, 40vw, 45rem);
   background-color: #f1f1f1;
   padding: 1.2rem;
   font-size: 1.1rem;

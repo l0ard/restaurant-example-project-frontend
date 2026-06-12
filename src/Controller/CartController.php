@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CartLine;
 use App\Entity\Food;
+use App\Entity\User;
 use App\Repository\CartRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Exception\ORMException;
@@ -15,23 +16,24 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class CartController extends AbstractController
 {
-    private CartRepository $cartRepository;
     private EntityManagerInterface $em;
 
-    private String $cartNotFoundMessage = 'Cart Not Found';
+    private string $cartNotFoundMessage = 'Cart Not Found';
 
     public function __construct(
-        CartRepository $cartRepository,
         EntityManagerInterface $em)
     {
-        $this->cartRepository = $cartRepository;
         $this->em = $em;
     }
 
     #[Route('/api/cart', name: 'app_cart', methods: ['GET'])]
     public function getCart(): JsonResponse
     {
-        $cart = $this->cartRepository->find(1);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $cart = $user->getCart();
+
         return $this->json(
             $cart,
             context: ['groups' => ['cart:read']]
@@ -45,7 +47,10 @@ final class CartController extends AbstractController
     #[Route('/api/cart/foods/{id}', methods: ['POST'])]
     public function addFoodToCart(Food $food): JsonResponse
     {
-        $cart = $this->cartRepository->find(1);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $cart = $user->getCart();
         if(!$cart){
             return $this->json(
                 ['message' => $this->cartNotFoundMessage],
@@ -79,10 +84,6 @@ final class CartController extends AbstractController
         );
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     #[Route('/api/cart/lines/{id}', methods: ['DELETE'])]
     public function removeCartLineFromCart(CartLine $cartLine): JsonResponse
     {
@@ -104,10 +105,6 @@ final class CartController extends AbstractController
         );
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     #[Route('/api/cart/lines/{id}', methods: ['PATCH'])]
     public function changeQuantity(CartLine $cartLine, Request $request): JsonResponse
     {
@@ -154,7 +151,10 @@ final class CartController extends AbstractController
     #[Route('/api/cart/clear', methods: ['POST'])]
     public function clearCart(): JsonResponse
     {
-        $cart = $this->cartRepository->find(1);
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $cart = $user->getCart();
         if(!$cart){
             return $this->json(
                 ['message' => $this->cartNotFoundMessage],

@@ -1,4 +1,4 @@
-header{
+header {
   position: relative;
   background: #af1313;
   padding: 0;
@@ -8,24 +8,46 @@ header{
 .container {
   margin: 0 auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
-nav ul{
+.search-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+}
+
+nav ul {
   list-style: none;
   display: flex;
   margin: 0;
 
-  li a {
-    padding: 1em;
-    display: inline-block;
+  li {
+    a,
+    button {
+      padding: 1em;
+      display: inline-block;
+      background: transparent;
+      border: none;
+      color: white;
+      font: inherit;
+      text-decoration: none;
+      cursor: pointer;
 
-    span {
-      background: white;
-      color: #af1313;
-      padding: 0.1rem 0.45rem;
-      border-radius: 100rem;
-      font-size: 0.9rem;
+      span {
+        background: white;
+        color: color-mix(in srgb, #af1313 80%, white);
+        padding: 0.1rem 0.45rem;
+        border-radius: 100rem;
+        font-size: 0.9rem;
+      }
+
+      &:hover {
+        background: color-mix(in srgb, #af1313 60%, white);
+        color: white;
+      }
     }
   }
 }
@@ -44,25 +66,21 @@ nav ul{
   position: absolute;
   z-index: 1;
   background: #af1313;
-  display:none;
+  display: none;
   border: 1px solid white;
-  a{
+
+  a {
     width: 100%;
-    min-width:8rem;
+    min-width: 8rem;
   }
-  > a:not(:first-child){
+
+  > a:not(:first-child) {
     border-top: 1px solid white;
   }
 }
 
-a{
+a {
   color: white;
-
-  &:hover{
-    background: white;
-    color: #af1313;
-    cursor: pointer;
-  }
 
   &.logo {
     font-weight: bold;
@@ -71,14 +89,10 @@ a{
   }
 }
 
-
-
-nav > ul > li:first-child > a {
-  border-left: 1px solid white;
-}
-nav > ul > li + li > a {
+nav > ul > li:first-child > :is(a, button) {
   border-left: 1px solid white;
 }
 
-
-
+nav > ul > li + li > :is(a, button) {
+  border-left: 1px solid white;
+}

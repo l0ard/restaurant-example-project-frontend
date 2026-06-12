@@ -22,6 +22,10 @@ class Cart
     #[ORM\OneToMany(targetEntity: CartLine::class, mappedBy: 'cart', orphanRemoval: true)]
     private Collection $cartLines;
 
+    #[ORM\OneToOne(inversedBy: 'cart', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->cartLines = new ArrayCollection();
@@ -85,5 +89,17 @@ class Cart
                 $sum + $line->getQuantity(),
             0
         );
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

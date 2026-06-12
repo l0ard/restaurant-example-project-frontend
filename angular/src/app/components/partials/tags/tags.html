@@ -1,9 +1,22 @@
-<div> Tags:
-  @if (tags(); as tags){
-    @for (tag of tags; track tag) {
-      <a [routerLink]="['/tag', tag.id]">
-        {{tag.name}} ( {{tag.foodCount}} )
-      </a>
+<div class="tags-container">
+  <div class="tags-list">
+    @if (tags(); as tags) {
+      @for (tag of tags; track tag) {
+        <a
+          class="tag"
+          [routerLink]="['/tag', tag.id]"
+          routerLinkActive="active-tag"
+        >
+
+          <span class="tag-name">
+            {{ tag.name }}
+          </span>
+
+          <span class="tag-count">
+            {{ tag.foodCount }}
+          </span>
+        </a>
+      }
     }
-  }
+  </div>
 </div>

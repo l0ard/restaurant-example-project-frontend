@@ -1,15 +1,20 @@
 <header>
   <div class="container">
     <a href="#" routerLink="/" class="logo">{{ "Food Place!" | uppercase }}</a>
+    <div class="search-container">
+      <app-search />
+    </div>
     <nav>
       <ul>
-        <li><a routerLink="/login">Login</a></li>
+        @if(!isAuthenticated()) {
+          <li><a routerLink="/login">Login</a></li>
+        } @else {
+
         <li class="menu-container">
-          <a routerLink="/dashboard">John</a>
+          <a routerLink="/dashboard">{{ currentUser()?.username }}</a>
           <div class="menu">
             <a routerLink="/profile">Profile</a>
             <a routerLink="/orders">Orders</a>
-            <a href="#">Logout</a>
           </div>
         </li>
         <li>
@@ -20,6 +25,10 @@
             }
           </a>
         </li>
+          <li>
+            <button type="button" (click)="logout()">Logout</button>
+          </li>
+        }
       </ul>
     </nav>
   </div>
